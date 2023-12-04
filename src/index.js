@@ -20,7 +20,8 @@ import TableCandidature from './Layout/Candidature/Components/TableCandidature';
 import AuthGuard from './AuthGuard/AuthGuard';
 import Faq from './Layout/Faq/Faq';
 import QuestionReponse from './Layout/Question_Reponse/QuestionReponse';
-
+import Guide from './Layout/Guide/Guide';
+import Contact from './Layout/Contact/Contact';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -42,6 +43,8 @@ root.render(
         <Route exact path="organisation" element={<Organisation />} />
         <Route exact path="faq" element={<Faq />} />
         <Route exact path="question_reponse" element={<QuestionReponse />} />
+        <Route exact path="guide" element={<Guide />} />
+        <Route exact path="contact" element={<Contact />} />
         {/* <Route index element={<Homepage />} /> */}
       </Route>
     </Routes>

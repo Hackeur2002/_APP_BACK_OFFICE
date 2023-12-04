@@ -21,6 +21,8 @@ import GTranslateIcon from '@mui/icons-material/GTranslate';
 import LogoutIcon from '@mui/icons-material/Logout';
 import QuizIcon from '@mui/icons-material/Quiz';
 import QuestionAnswerIcon from '@mui/icons-material/QuestionAnswer';
+import MenuBookIcon from '@mui/icons-material/MenuBook';
+import ContactMailIcon from '@mui/icons-material/ContactMail';
 import logo from './Images/logo.png'
 import { ServiceUtilisateur } from '../../ServiceUtilisateur/ServiceUtilisateur';
 
@@ -119,6 +121,18 @@ function SidebarDefault(props) {
                             <a href="/admin/question_reponse" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <QuestionAnswerIcon className="text-gray-500" />
                                 <span className="flex-1 ms-3 whitespace-nowrap text-gray-400">Questions/Réponses</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/guide" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <MenuBookIcon className="text-gray-500" />
+                                <span className="flex-1 ms-3 whitespace-nowrap text-gray-400">Guides</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/admin/contact" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                                <ContactMailIcon className="text-gray-500" />
+                                <span className="flex-1 ms-3 whitespace-nowrap text-gray-400">Contacts</span>
                             </a>
                         </li>
                         <hr />
