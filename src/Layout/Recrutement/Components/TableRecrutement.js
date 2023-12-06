@@ -3,6 +3,9 @@ import { Table } from 'flowbite-react';
 import { Button, Label, Modal, TextInput, Select, Textarea } from 'flowbite-react';
 import ReactMarkdown from 'react-markdown'
 import Titre from '../../../DefaultLayout/Titre/Titre';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function TableRecrutement(props) {
     const [openModal, setOpenModal] = useState(false);
@@ -13,19 +16,18 @@ function TableRecrutement(props) {
     const [special, setSpecial] = useState('');
     const [region, setRegion] = useState('');
     const [lieu, setLieu] = useState('');
-    const [descSal, setDescSal] = useState('');
+    const [mail, setMail] = useState('');
     const [dateNow, setDateNow] = useState(Date);
     const [dateFin, setDateFin] = useState(Date);
     const Form = (e) => {
         e.preventDefault();
-        console.log(poste + ' ' + desc + ' ' + type + ' ' + special + ' ' + region + ' ' + descSal + ' ' + lieu + ' ' + dateNow + ' ' + dateFin)
+        console.log(poste + ' ' + desc + ' ' + type + ' ' + special + ' ' + region + ' ' + ' ' + lieu + ' ' + dateNow + ' ' + dateFin)
         
         setPoste('')
         setDesc('')
         setType('')
         setSpecial('')
         setRegion('')
-        setDescSal('')
         setLieu('')
         setDateNow('')
         setDateFin('')
@@ -41,7 +43,7 @@ function TableRecrutement(props) {
                         <Modal.Header />
                         <Modal.Body>
                             <div className="space-y-6">
-                                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour crée une offre d'emploi</h3>
+                                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour créer une offre d'emploi</h3>
                                 <form onSubmit={Form}>
                                     <div>
                                         <div className="mb-2 block">
@@ -66,7 +68,10 @@ function TableRecrutement(props) {
                                             <div className="mb-2 block">
                                                 <Label htmlFor="typeemploi" value="Type de l'emploi" />
                                             </div>
-                                            <TextInput onChange={(e) => setType(e.target.value)} value={type} id="typeemploi" type="text" required />
+                                            <Select onChange={(e) => setType(e.target.value)} value={type} id="typeemploi" required>
+                                                <option>CDD</option>
+                                                <option>CDI</option>
+                                            </Select>
                                         </div>
                                         <div>
                                             <div className="mb-2 block">
@@ -94,9 +99,9 @@ function TableRecrutement(props) {
                                     </div>
                                     <div>
                                         <div className="mb-2 block">
-                                            <Label htmlFor="descriptionSalaire" value="Description du salaire" />
+                                            <Label htmlFor="mail" value="Adresse mail de réception" />
                                         </div>
-                                        <TextInput onChange={(e) => setDescSal(e.target.value)} value={descSal} id="descriptionSalaire" type="text" required />
+                                        <TextInput onChange={(e) => setMail(e.target.value)} value={mail} id="mail" type="text" required />
                                     </div>
                                     <div className='grid grid-cols-2 gap-2'>
                                         <div>
@@ -112,7 +117,7 @@ function TableRecrutement(props) {
                                             <TextInput onChange={(e) => setDateFin(e.target.value)} value={dateFin} id="datefin" type='date' required />
                                         </div>
                                     </div>
-                                    <div className="w-full">
+                                    <div className="w-full pt-3">
                                         <Button type='submit'>Ajouter</Button>
                                     </div>
                                 </form>
@@ -197,7 +202,7 @@ function TableRecrutement(props) {
                             <Table.HeadCell className='bg-green-950 text-white'>Description</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white'>Crée le</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white'>Date fin</Table.HeadCell>
-                            <Table.HeadCell className='bg-green-950 text-white w-10'>
+                            <Table.HeadCell className='bg-green-950 text-white w-20'>
                                 <span>Actions</span>
                             </Table.HeadCell>
                         </Table.Head>
@@ -211,14 +216,11 @@ function TableRecrutement(props) {
                                 <Table.Cell>Date création</Table.Cell>
                                 <Table.Cell>Date fin</Table.Cell>
                                 <Table.Cell>
-                                    <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                        Editer
-                                    </a>
-                                     / 
-                                    <a href="#" className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-                                        Spprimer
-                                    </a>
-                                    <Button color='' className='bg-amber-600 hover:bg-amber-700 text-white' onClick={() => setOpenSeeModal(true)}>Voir</Button>
+                                    <div className='flex flex-row'>
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white"><EditIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-red-600 hover:bg-red-700 text-white"><DeleteForeverIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white" onClick={() => setOpenSeeModal(true)}><VisibilityIcon /></Button>
+                                    </div>
                                 </Table.Cell>
                             </Table.Row>
                         </Table.Body>

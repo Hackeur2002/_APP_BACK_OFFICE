@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Table } from 'flowbite-react';
 import { Button, Checkbox, Label, Modal, TextInput } from 'flowbite-react';
 import Titre from '../../../DefaultLayout/Titre/Titre';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function TableThemeEvenement(props) {
     const [openModal, setOpenModal] = useState(false);
@@ -25,7 +27,7 @@ function TableThemeEvenement(props) {
                         <Modal.Body>
                             <form onSubmit={Form}>
                                 <div className="space-y-6">
-                                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour crée un thème d'évènement</h3>
+                                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour créer un thème d'évènement</h3>
                                     <div>
                                         <div className="mb-2 block">
                                             <Label htmlFor="code" value="Code du thème d'évènement" />
@@ -53,7 +55,7 @@ function TableThemeEvenement(props) {
                             <Table.HeadCell className='bg-green-950 text-white'>Code</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white'>Libellé</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white'>Crée le</Table.HeadCell>
-                            <Table.HeadCell className='bg-green-950 text-white w-10'>
+                            <Table.HeadCell className='bg-green-950 text-white w-20'>
                                 <span>Actions</span>
                             </Table.HeadCell>
                         </Table.Head>
@@ -66,13 +68,10 @@ function TableThemeEvenement(props) {
                                 <Table.Cell>Un sous titre</Table.Cell>
                                 <Table.Cell>date création</Table.Cell>
                                 <Table.Cell>
-                                    <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                        Editer
-                                    </a>
-                                     / 
-                                    <a href="#" className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-                                        Spprimer
-                                    </a>
+                                    <div className='flex flex-row'>
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white"><EditIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-red-600 hover:bg-red-700 text-white"><DeleteForeverIcon /></Button>
+                                    </div>
                                 </Table.Cell>
                             </Table.Row>
                         </Table.Body>

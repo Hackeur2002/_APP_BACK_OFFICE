@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import { Table } from 'flowbite-react';
-import { Button, Checkbox, Label, Modal, TextInput, Select, FileInput } from 'flowbite-react';
+import { Button, Textarea, Label, Modal, TextInput, Select, FileInput } from 'flowbite-react';
 import Titre from '../../../DefaultLayout/Titre/Titre';
+import ReactMarkdown from 'react-markdown'
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function TableEvent(props) {
     const [openModal, setOpenModal] = useState(false);
@@ -13,6 +17,8 @@ function TableEvent(props) {
     const [langue, setLangue] = useState('');
     const [pg, setPg] = useState('');
     const [lieu, setLieu] = useState('');
+    const [lien, setLien] = useState('');
+    const [desc, setDesc] = useState('');
     const [dateNow, setDateNow] = useState(Date);
     const [dateFin, setDateFin] = useState(Date);
     const [selectedFile, setSelectedFile] = useState(null);
@@ -59,7 +65,7 @@ function TableEvent(props) {
                         <Modal.Body>
                             <form onSubmit={Form}>
                                 <div className="space-y-6">
-                                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour crée un évènement</h3>
+                                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour créer un évènement</h3>
                                     <div>
                                         <div className="mb-2 block">
                                             <Label htmlFor="image" value="Insérer une image de l'évènement" />
@@ -124,11 +130,29 @@ function TableEvent(props) {
                                             </Select>
                                         </div>
                                     </div>
+                                    <div className='pb-2'>
+                                        <div className="mb-2 block">
+                                            <Label htmlFor="description" value="Description de l'évènement" />
+                                        </div>
+                                        <Textarea onChange={(e) => setDesc(e.target.value)} value={desc} id="description" type="text" required />
+                                    </div>
+                                    <div>
+                                        <div className="mb-2 block">
+                                            <Label htmlFor="description" value="Aperçu" />
+                                        </div>
+                                        <ReactMarkdown className='prose lg:prose-xl bg-gray-200 w-full p-2'>{desc}</ReactMarkdown>
+                                    </div>
                                     <div>
                                         <div className="mb-2 block">
                                             <Label htmlFor="lieu" value="Lieu de l'évènement" />
                                         </div>
                                         <TextInput onChange={(e) => setLieu(e.target.value)} value={lieu} id="lieu" required />
+                                    </div>
+                                    <div>
+                                        <div className="mb-2 block">
+                                            <Label htmlFor="lien" value="Lien d'inscription de l'évènement" />
+                                        </div>
+                                        <TextInput onChange={(e) => setLien(e.target.value)} value={lien} id="lien" />
                                     </div>
                                     <div className='grid grid-cols-2 gap-2'>
                                         <div>
@@ -201,9 +225,21 @@ function TableEvent(props) {
                                 </div>
                                 <div>
                                     <div className="mb-2 block">
+                                        <Label htmlFor="description" value="Description de l'évènement" />
+                                    </div>
+                                    DESCRIPTION
+                                </div>
+                                <div>
+                                    <div className="mb-2 block">
                                         <Label htmlFor="lieu" value="Lieu de l'évènement" />
                                     </div>
                                     LIEU
+                                </div>
+                                <div>
+                                    <div className="mb-2 block">
+                                        <Label htmlFor="lieu" value="Lien d'inscription de l'évènement" />
+                                    </div>
+                                    LIEN
                                 </div>
                                 <div>
                                     <div className="mb-2 block">
@@ -229,7 +265,7 @@ function TableEvent(props) {
                             <Table.HeadCell className='bg-green-950 text-white'>Sous-Titre</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white'>Début</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white'>Fin</Table.HeadCell>
-                            <Table.HeadCell className='bg-green-950 w-10 text-white'>
+                            <Table.HeadCell className='bg-green-950 text-white w-20'>
                                 <span>Actions</span>
                             </Table.HeadCell>
                         </Table.Head>
@@ -243,14 +279,11 @@ function TableEvent(props) {
                                 <Table.Cell>Date début</Table.Cell>
                                 <Table.Cell>Date fin</Table.Cell>
                                 <Table.Cell>
-                                    <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                        Editer
-                                    </a>
-                                    /
-                                    <a href="#" className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-                                        Spprimer
-                                    </a>
-                                    <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white" onClick={() => setOpenSeeModal(true)}>Voir</Button>
+                                    <div className='flex flex-row'>
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white"><EditIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-red-600 hover:bg-red-700 text-white"><DeleteForeverIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white" onClick={() => setOpenSeeModal(true)}><VisibilityIcon /></Button>
+                                    </div>
                                 </Table.Cell>
                             </Table.Row>
                         </Table.Body>

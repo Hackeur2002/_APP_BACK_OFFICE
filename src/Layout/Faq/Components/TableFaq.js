@@ -24,7 +24,7 @@ function TableFaq(props) {
                         <Modal.Body>
                             <form onSubmit={Form}>
                                 <div className="space-y-6">
-                                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour crée une faq</h3>
+                                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour créer une faq</h3>
                                     <div>
                                         <div className="mb-2 block">
                                             <Label htmlFor="code" value="Code du faq" />

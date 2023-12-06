@@ -3,6 +3,9 @@ import { Table } from 'flowbite-react';
 import { Button, Checkbox, Label, Modal, TextInput, Select, Textarea, FileInput } from 'flowbite-react';
 import ReactMarkdown from 'react-markdown'
 import Titre from '../../../DefaultLayout/Titre/Titre';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function OrganisationTable(props) {
     const [openModal, setOpenModal] = useState(false);
@@ -47,7 +50,7 @@ function OrganisationTable(props) {
                         <Modal.Header />
                         <Modal.Body>
                             <div className="space-y-6">
-                                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour crée une organisation</h3>
+                                <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour créer une organisation</h3>
                                 <form onSubmit={Form}>
                                     <div>
                                         <div className="mb-2 block">
@@ -193,7 +196,7 @@ function OrganisationTable(props) {
                             <Table.HeadCell className='bg-green-950 text-white'>Nom</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white'>Email</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white'>Phone</Table.HeadCell>
-                            <Table.HeadCell className='bg-green-950 text-white w-10'>
+                            <Table.HeadCell className='bg-green-950 text-white w-20'>
                                 <span>Actions</span>
                             </Table.HeadCell>
                         </Table.Head>
@@ -207,14 +210,11 @@ function OrganisationTable(props) {
                                 <Table.Cell>Un email</Table.Cell>
                                 <Table.Cell>Une Phone</Table.Cell>
                                 <Table.Cell>
-                                    <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                        Editer
-                                    </a>
-                                     / 
-                                    <a href="#" className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-                                        Spprimer
-                                    </a>
-                                    <Button color='' className='bg-amber-600 hover:bg-amber-700 text-white' onClick={() => setOpenSeeModal(true)}>Voir</Button>
+                                    <div className='flex flex-row'>
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white"><EditIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-red-600 hover:bg-red-700 text-white"><DeleteForeverIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white" onClick={() => setOpenSeeModal(true)}><VisibilityIcon /></Button>
+                                    </div>
                                 </Table.Cell>
                             </Table.Row>
                         </Table.Body>

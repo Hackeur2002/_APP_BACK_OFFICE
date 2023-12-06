@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Table } from 'flowbite-react';
 import { Button, Select, Label, Modal, TextInput } from 'flowbite-react';
 import Titre from '../../../DefaultLayout/Titre/Titre';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function TableQuestionReponse(props) {
     const [openModal, setOpenModal] = useState(false);
@@ -26,7 +29,7 @@ function TableQuestionReponse(props) {
                         <Modal.Body>
                             <form onSubmit={Form}>
                                 <div className="space-y-6">
-                                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour crée une question-réponse</h3>
+                                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour créer une question-réponse</h3>
                                     <div>
                                         <div className="mb-2 block">
                                             <Label htmlFor="question" value="Question" />
@@ -60,10 +63,10 @@ function TableQuestionReponse(props) {
                     <Table striped>
                         <Table.Head>
                             <Table.HeadCell className='bg-green-950 text-white'>#</Table.HeadCell>
-                            <Table.HeadCell className='bg-green-950 text-white'>Code</Table.HeadCell>
-                            <Table.HeadCell className='bg-green-950 text-white'>Libellé</Table.HeadCell>
-                            <Table.HeadCell className='bg-green-950 text-white'>Crée le</Table.HeadCell>
-                            <Table.HeadCell className='bg-green-950 text-white w-10'>
+                            <Table.HeadCell className='bg-green-950 text-white'>Question</Table.HeadCell>
+                            <Table.HeadCell className='bg-green-950 text-white'>Réponse</Table.HeadCell>
+                            <Table.HeadCell className='bg-green-950 text-white'>FAQ</Table.HeadCell>
+                            <Table.HeadCell className='bg-green-950 text-white w-20'>
                                 <span>Actions</span>
                             </Table.HeadCell>
                         </Table.Head>
@@ -72,17 +75,14 @@ function TableQuestionReponse(props) {
                                 <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
                                     1
                                 </Table.Cell>
-                                <Table.Cell>Un Code</Table.Cell>
-                                <Table.Cell>Un libellé</Table.Cell>
-                                <Table.Cell>Date création</Table.Cell>
+                                <Table.Cell>Une question</Table.Cell>
+                                <Table.Cell>Une réponse</Table.Cell>
+                                <Table.Cell>Une FAQ</Table.Cell>
                                 <Table.Cell>
-                                    <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                        Editer
-                                    </a>
-                                    /
-                                    <a href="#" className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-                                        Spprimer
-                                    </a>
+                                    <div className='flex flex-row'>
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white"><EditIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-red-600 hover:bg-red-700 text-white"><DeleteForeverIcon /></Button>
+                                    </div>
                                 </Table.Cell>
                             </Table.Row>
                         </Table.Body>

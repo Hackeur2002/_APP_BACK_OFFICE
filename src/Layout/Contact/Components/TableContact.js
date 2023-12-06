@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { Table } from 'flowbite-react';
 import { Button, Label, Modal } from 'flowbite-react';
 import Titre from '../../../DefaultLayout/Titre/Titre';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function TableContact(props) {
     const [openSeeModal, setOpenSeeModal] = useState(false);
@@ -35,7 +38,7 @@ function TableContact(props) {
                         </div>
                     </Modal.Body>
                 </Modal>
-                <Titre titre="Liste des candidatures" />
+                <Titre titre="Liste des contacts" />
                 <div className="overflow-x-auto">
                     <Table striped>
                         <Table.Head>
@@ -54,14 +57,11 @@ function TableContact(props) {
                                 <Table.Cell>Un nom</Table.Cell>
                                 <Table.Cell>Un mail</Table.Cell>
                                 <Table.Cell>
-                                    <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                        Editer
-                                    </a>
-                                    /
-                                    <a href="#" className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-                                        Spprimer
-                                    </a>
-                                    <Button color='' className='bg-amber-600 hover:bg-amber-700 text-white' onClick={() => setOpenSeeModal(true)}>Voir</Button>
+                                    <div className='flex flex-row'>
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white"><EditIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-red-600 hover:bg-red-700 text-white"><DeleteForeverIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white" onClick={() => setOpenSeeModal(true)}><VisibilityIcon /></Button>
+                                    </div>
                                 </Table.Cell>
                             </Table.Row>
                         </Table.Body>

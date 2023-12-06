@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Table } from 'flowbite-react';
 import { Button, Label, Modal, TextInput } from 'flowbite-react';
 import Titre from '../../../DefaultLayout/Titre/Titre';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import EditIcon from '@mui/icons-material/Edit';
 
 function TableLangue(props) {
     const [openModal, setOpenModal] = useState(false);
@@ -24,7 +26,7 @@ function TableLangue(props) {
                         <Modal.Body>
                             <form onSubmit={Form}>
                                 <div className="space-y-6">
-                                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour crée une langue</h3>
+                                    <h3 className="text-xl font-medium text-gray-900 dark:text-white">Remplissez les champs et validez pour créer une langue</h3>
                                     <div>
                                         <div className="mb-2 block">
                                             <Label htmlFor="code" value="Code de la langue" />
@@ -78,13 +80,10 @@ function TableLangue(props) {
                                 <Table.Cell>Un libellé</Table.Cell>
                                 <Table.Cell>Date création</Table.Cell>
                                 <Table.Cell>
-                                    <a href="#" className="font-medium text-cyan-600 hover:underline dark:text-cyan-500">
-                                        Editer
-                                    </a>
-                                     / 
-                                    <a href="#" className="font-medium text-red-600 hover:underline dark:text-cyan-500">
-                                        Spprimer
-                                    </a>
+                                    <div className='flex flex-row'>
+                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white"><EditIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                        <Button color='' className="bg-red-600 hover:bg-red-700 text-white"><DeleteForeverIcon /></Button>
+                                    </div>
                                 </Table.Cell>
                             </Table.Row>
                         </Table.Body>
