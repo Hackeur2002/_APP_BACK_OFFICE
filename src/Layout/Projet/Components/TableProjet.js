@@ -6,6 +6,7 @@ import Titre from '../../../DefaultLayout/Titre/Titre';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import MDEditor from "@uiw/react-md-editor";
 
 function TableProjet() {
     const [openModal, setOpenModal] = useState(false);
@@ -81,13 +82,7 @@ function TableProjet() {
                                         <div className="mb-2 block">
                                             <Label htmlFor="description" value="Description du projet" />
                                         </div>
-                                        <Textarea onChange={(e) => setDesc(e.target.value)} value={desc} id="description" type="text" required />
-                                    </div>
-                                    <div>
-                                        <div className="mb-2 block">
-                                            <Label htmlFor="description" value="Aperçu" />
-                                        </div>
-                                        <ReactMarkdown className='prose lg:prose-xl bg-gray-200 w-full p-2'>{desc}</ReactMarkdown>
+                                        <MDEditor onChange={setDesc} value={desc} data-color-mode="light" />
                                     </div>
                                     <div className='grid grid-cols-2 gap-2'>
                                         <div>
