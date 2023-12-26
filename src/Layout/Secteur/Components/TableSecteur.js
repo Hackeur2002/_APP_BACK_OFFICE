@@ -1,20 +1,42 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Table } from 'flowbite-react';
 import { Button, Checkbox, Label, Modal, TextInput } from 'flowbite-react';
 import Titre from '../../../DefaultLayout/Titre/Titre';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import EditIcon from '@mui/icons-material/Edit';
+import axios from 'axios';
 
 function TableSecteur(props) {
     const [openModal, setOpenModal] = useState(false);
     const [code, setCode] = useState('');
     const [libelle, setLibelle] = useState('');
+    const [secteurs, setSecteurs] = useState(['']);
     const Form = (e) => {
         e.preventDefault();
         console.log(code + ' ' + libelle)
-        setCode('')
-        setLibelle('')
+        const newurl = process.env.REACT_APP_URL_STANDART + "api/secteurs"
+        axios.post(newurl, { codeSecteur: code, libelleSecteur: libelle }, { withCredentials: true })
+            .then(data => {
+                setCode('')
+                setLibelle('')
+                alert('Secteur enregistrer')
+                window.location.reload()
+            })
+            .catch(err => {
+                alert('Vérifiez vos informations')
+            })
+        
     }
+    useEffect(()=>{
+        const newurl = process.env.REACT_APP_URL_STANDART + "api/secteurs"
+        axios.get(newurl, { withCredentials: true })
+        .then(response => {
+            setSecteurs(response.data.data)
+        })
+        .catch(err=>{
+            alert('Erreur lors de la récupération des informations')
+        })
+    },[])
     return (
         <>
             <div className="p-4 sm:ml-64">
@@ -53,26 +75,32 @@ function TableSecteur(props) {
                             <Table.HeadCell className='bg-green-950 text-white'>#</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white'>Code</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white'>Libellé</Table.HeadCell>
-                            <Table.HeadCell className='bg-green-950 text-white'>Crée le</Table.HeadCell>
                             <Table.HeadCell className='bg-green-950 text-white w-20'>
                                 <span>Actions</span>
                             </Table.HeadCell>
                         </Table.Head>
                         <Table.Body className="divide-y">
-                            <Table.Row className="bg-white dark:border-gray-700 dark:bg-gray-800">
-                                <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
-                                    1
-                                </Table.Cell>
-                                <Table.Cell>Un code</Table.Cell>
-                                <Table.Cell>Un libellé</Table.Cell>
-                                <Table.Cell>Date création</Table.Cell>
-                                <Table.Cell>
-                                    <div className='flex flex-row'>
-                                        <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white"><EditIcon /></Button>&nbsp;&nbsp;&nbsp;
-                                        <Button color='' className="bg-red-600 hover:bg-red-700 text-white"><DeleteForeverIcon /></Button>
-                                    </div>
-                                </Table.Cell>
-                            </Table.Row>
+                            {secteurs.length > 0 ? 
+                                secteurs.map((sect, index)=>(
+                                    <Table.Row key={index} className="bg-white dark:border-gray-700 dark:bg-gray-800">
+                                        <Table.Cell className="whitespace-nowrap font-medium text-gray-900 dark:text-white">
+                                            {sect.id}
+                                        </Table.Cell>
+                                        <Table.Cell>{sect.codeSecteur}</Table.Cell>
+                                        <Table.Cell>{sect.libelleSecteur}</Table.Cell>
+                                        <Table.Cell>
+                                            <div className='flex flex-row'>
+                                                <Button color='' className="bg-amber-600 hover:bg-amber-700 text-white"><EditIcon /></Button>&nbsp;&nbsp;&nbsp;
+                                                <Button color='' className="bg-red-600 hover:bg-red-700 text-white"><DeleteForeverIcon /></Button>
+                                            </div>
+                                        </Table.Cell>
+                                    </Table.Row>
+                                ))
+                             : 
+                            (
+                                ""
+                            )
+                            }
                         </Table.Body>
                     </Table>
                 </div>

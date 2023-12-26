@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import logo from './adpme_logo.jpeg'
 import { ServiceUtilisateur } from '../../ServiceUtilisateur/ServiceUtilisateur';
+import axios from 'axios'
 
 function Login(props) {
     const [mail, setMail] = useState('')
@@ -9,14 +10,25 @@ function Login(props) {
     const nav = useNavigate()
     const Form = (e) => {
         e.preventDefault();
-        if (mail=="kathysatera@gmail.com" && mdp == "1234") {
+        if (mail && mdp) {
             console.log(mail + " " + mdp)
-            ServiceUtilisateur.SaveUserMail(mail)
-            ServiceUtilisateur.SaveUserPass(mdp)
-            alert("Bienvenue "+mail)
-            nav("/admin")
+            const url = process.env.REACT_APP_URL_STANDART + "api/login"
+            axios.post(url, { email: mail, password: mdp }, { withCredentials: true })
+            .then(response=>{
+                const cookies = response.headers['authorization'];
+                console.log('Cookies reçus :', response.data);
+                console.log('Headers reçus :', response.headers);
+                ServiceUtilisateur.SaveUserMail(mail)
+                ServiceUtilisateur.SaveUserPass(mdp)
+                alert("Bienvenue " + mail)
+                nav("/admin") 
+            })
+            .catch(err=>{
+                alert("Veuillez vérifier vos informations !")
+            })
+            
         }else{
-            return alert("Vous n'êtes pas dans ma base de donnée")
+            return alert("Tous les champs sont requis !")
         }
     }
     return (

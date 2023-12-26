@@ -25,11 +25,26 @@ import MenuBookIcon from '@mui/icons-material/MenuBook';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import logo from './Images/logo.png'
 import { ServiceUtilisateur } from '../../ServiceUtilisateur/ServiceUtilisateur';
+import axios from 'axios'
+
+const urlstandart = process.env.REACT_APP_URL_STANDART
 
 function SidebarDefault(props) {
     const deconnexion = (e) => {
         ServiceUtilisateur.logout()
         window.location.reload()
+        if(window.confirm("Voulez-vous vraiment vous déconnecter ?") == true)
+        {
+            const newurl = urlstandart + `api/logout`
+            axios.post(newurl)
+                .then(res => {
+                    ServiceUtilisateur.logout()
+                    window.location.reload()
+                })
+                .catch(err => {
+                    alert("Erreur lors de la déconnexion")
+                })
+        }
     }
     return (
         <>
@@ -127,12 +142,6 @@ function SidebarDefault(props) {
                             <a href="/admin/guide" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
                                 <MenuBookIcon className="text-gray-500" />
                                 <span className="flex-1 ms-3 whitespace-nowrap text-gray-400">Guides</span>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/admin/contact" className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                                <ContactMailIcon className="text-gray-500" />
-                                <span className="flex-1 ms-3 whitespace-nowrap text-gray-400">Contacts</span>
                             </a>
                         </li>
                         <hr />
